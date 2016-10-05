@@ -1,0 +1,54 @@
+% This file is part of the TGASplus project.
+% Copyright 2016 the authors.
+
+% ## Style notes
+% - Use n-dash (--) for color--magnitude diagram.
+
+\documentclass[12pt]{article}
+
+\sloppy\sloppypar\raggedbottom\thispagestyle{empty}
+
+\begin{document}
+
+\section*{Far, far better inverse distances for Gaia stars}
+
+\noindent
+DWH, DSTN, JB, others?
+
+\paragraph{Abstract:}
+% Context:
+Given that the color--magnitude diagram of stars is informative, and
+given that stars are drawn from a quasi-stationary distribution, the
+best measure of a \gaia\ \tgas\ Catalog star's distance will not be based on
+it's tabulated parallax measurement alone (or even at all):
+The color and magnitude are both very informative, and---even if you
+only care about a single star in the Catalog---the colors, magnitudes,
+and parallaxes of all the other stars in the Catalog are \emph{also}
+informative.
+% Aims:
+Here we make use of both of these pieces of information, but no
+physical models of stars whatsoever, to greatly improve our distance
+estimates for \gaia\ \tgas\ stars.
+% Methods:
+We transform the color--magnitude diagram to a space in which the
+measurement uncertainties are expected to be close to Gaussian in
+form.
+This permits us to build a numerically tractable hierarchical model
+with the Extreme Deconvolution method for modeling distributions of
+objects given noisy, heteroskedastic measurements.
+The output of the hierarchical model is (among other things) posterior
+pdfs for the distance to every star in the Catalog.
+% Results:
+The posterior pdfs for distance for typical \tgas\ stars is more
+informative (more precise) by a factor of XXX relative to any
+comparable analysis of the star's parallax measurement alone.
+
+\section{Philosophy of this project}
+
+\section{Assumptions and method}
+
+\paragraph{Acknowledgements:}
+It is a pleasure to thank various people.
+We are funded by various agencies.
+
+\end{document}
