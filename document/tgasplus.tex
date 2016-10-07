@@ -6,11 +6,15 @@
 
 \documentclass[12pt]{article}
 
-\sloppy\sloppypar\raggedbottom\thispagestyle{empty}
+\newcommand{\project}[1]{\textsl{#1}}
+\newcommand{\acronym}[1]{\small{#1}}
+\newcommand{\gaia}{\project{Gaia}}
+\newcommand{\tgas}{\project{\acronym{TGAS}}}
 
+\frenchspacing\sloppy\sloppypar\raggedbottom\thispagestyle{empty}
 \begin{document}
 
-\section*{Far, far better inverse distances for Gaia stars}
+\section*{Far, far better distances for Gaia stars}
 
 \noindent
 DWH, DSTN, JB, others?
@@ -21,9 +25,10 @@ Given that the color--magnitude diagram of stars is informative, and
 given that stars are drawn from a quasi-stationary distribution, the
 best measure of a \gaia\ \tgas\ Catalog star's distance will not be based on
 it's tabulated parallax measurement alone (or even at all):
-The color and magnitude are both very informative, and---even if you
+The color and magnitude are both very informative.
+Furthermore, because of statistical shrinkage---even if you
 only care about a single star in the Catalog---the colors, magnitudes,
-and parallaxes of all the other stars in the Catalog are \emph{also}
+and parallaxes of all the \emph{other} stars in the Catalog are \emph{also}
 informative.
 % Aims:
 Here we make use of both of these pieces of information, but no
@@ -42,10 +47,19 @@ pdfs for the distance to every star in the Catalog.
 The posterior pdfs for distance for typical \tgas\ stars is more
 informative (more precise) by a factor of XXX relative to any
 comparable analysis of the star's parallax measurement alone.
+Everything we do here can be done, only far better, for subsequent
+\gaia\ data releases.
 
 \section{Philosophy of this project}
 
 \section{Assumptions and method}
+
+\section{Results and discussion}
+We ran on everything and got XXX.
+
+Here are some plots comparing to CBJ-style inferences.
+
+HOGG: How much better when we get BpRp and RVS!
 
 \paragraph{Acknowledgements:}
 It is a pleasure to thank various people.
