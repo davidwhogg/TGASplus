@@ -5,13 +5,19 @@
 % - Use n-dash (--) for color--magnitude diagram.
 
 \documentclass[12pt]{article}
+\usepackage{url}
 
+\include{gitstuff}
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\acronym}[1]{\small{#1}}
 \newcommand{\gaia}{\project{Gaia}}
 \newcommand{\tgas}{\project{\acronym{TGAS}}}
 
-\frenchspacing\sloppy\sloppypar\raggedbottom\thispagestyle{empty}
+\urlstyle{sf}
+\frenchspacing
+\sloppy\sloppypar\raggedbottom
+\thispagestyle{empty}
+
 \begin{document}
 
 \section*{Far, far better distances for Gaia stars}
@@ -60,6 +66,13 @@ We ran on everything and got XXX.
 Here are some plots comparing to CBJ-style inferences.
 
 HOGG: How much better when we get BpRp and RVS!
+
+All the data used in this project are public. All the code used in
+this project is open-source. The main codebase is licensed under the
+\project{\acronym{MIT} License} and available at
+\url{https://github.com/davidwhogg/TGASplus}. This version of the
+manuscript and figures was made at git hash
+\textsf{\githash\,(\gitdate)}.
 
 \paragraph{Acknowledgements:}
 It is a pleasure to thank various people.
