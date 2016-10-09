@@ -7,12 +7,17 @@
 \documentclass[12pt]{article}
 \usepackage{url}
 
+% text definitions
 \include{gitstuff}
 \newcommand{\project}[1]{\textsl{#1}}
 \newcommand{\acronym}[1]{\small{#1}}
 \newcommand{\gaia}{\project{Gaia}}
 \newcommand{\tgas}{\project{\acronym{TGAS}}}
 
+% math definitions
+\newcommand{\given}{\,|\,}
+
+% style stuff
 \urlstyle{sf}
 \frenchspacing
 \sloppy\sloppypar\raggedbottom
@@ -59,6 +64,12 @@ Everything we do here can be done, only far better, for subsequent
 \section{Philosophy of this project}
 
 \section{Assumptions and method}
+
+\begin{eqnarray}
+  d_{kt} &\sim& p(d_k\given\varpi_k,\theta_0)
+  \\
+  p(d_k\given\theta_0) &=& d^2\,\exp(-\frac{d^2}{L^2})
+\end{eqnarray}
 
 \section{Results and discussion}
 We ran on everything and got XXX.
