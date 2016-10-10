@@ -16,6 +16,9 @@
 
 % math definitions
 \newcommand{\given}{\,|\,}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\setof}[1]{\{{#1}\}}
+\newcommand{\pc}{\mathrm{pc}}
 
 % style stuff
 \urlstyle{sf}
@@ -66,9 +69,21 @@ Everything we do here can be done, only far better, for subsequent
 \section{Assumptions and method}
 
 \begin{eqnarray}
-  d_{kt} &\sim& p(d_k\given\varpi_k,\theta_0)
+  d_{kt} &\sim& p(d\given\varpi_k,\theta_0)
   \\
-  p(d_k\given\theta_0) &=& d^2\,\exp(-\frac{d^2}{L^2})
+  p(d\given\theta_0) &=& \frac{1}{Z}\,d^2\,\exp(-\frac{d^2}{L^2})
+  \\
+  p(M_G\given\alpha_n) &=& \sum_{q=1}^Q a_q\,\normal(M_G\given\mu_q,V_q)
+  \\
+  \alpha_n &=& \setof{a_q, \mu_q, V_q}_{q=1}^Q
+  \\
+  1 &=& \sum_{q=1}^Q a_q
+  \\
+  p(d\given\alpha_n) &\propto& \frac{1}{d}\,p(M_G\given\alpha_n)
+  \\
+  M_G &\equiv& G - A_G - 5\,\log_{10}(\frac{d}{10\,\pc})
+  \\
+  p(\alpha_n\given\varpi_k) &\propto& \frac{1}{T}\,\sum_{t=1}^T \frac{p(d_{kt}\given\alpha_n)}{p(d_{kt}\given\theta_0)}
 \end{eqnarray}
 
 \section{Results and discussion}
