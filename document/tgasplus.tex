@@ -13,6 +13,8 @@
 \newcommand{\acronym}[1]{\small{#1}}
 \newcommand{\gaia}{\project{Gaia}}
 \newcommand{\tgas}{\project{\acronym{TGAS}}}
+\newcommand{\twomass}{\project{\acronym{2MASS}}}
+\newcommand{\wise}{\project{All\acronym{WISE}}}
 
 % math definitions
 \newcommand{\given}{\,|\,}
@@ -48,7 +50,7 @@ informative.
 Here we make use of both of these pieces of information, but no
 physical models of stars whatsoever, to greatly improve our distance
 estimates for \gaia\ \tgas\ stars.
-% Methods:
+% Methods: CURRENTLY WRONG RE XD
 We transform the color--magnitude diagram to a space in which the
 measurement uncertainties are expected to be close to Gaussian in
 form.
@@ -66,7 +68,43 @@ Everything we do here can be done, only far better, for subsequent
 
 \section{Philosophy of this project}
 
+Shrinkage!
+
 \section{Assumptions and method}
+
+The \tgas\ Catalog (CITE) contains $N=XXX$ stars $n$, each of which has (for
+our purposes) a magnitude $G_n$, a measured parallax $\varpi_n$, and
+an uncertainty $\sigma_n$ on that parallax.
+Each of these stars (with a few exceptions) can be matched to entries
+in the \twomass\ Catalog (CITE) and the \wise\ Catalog (CITE), from
+which we can get infrared $J_n$ and $W1_n$ magnitudes.
+We visualize these data in \figurename~\ref{fig:data}.
+
+\begin{figure}[p]
+~~
+\caption{The data used in this project.\label{fig:data}}
+\end{figure}
+
+In what follows, we make a set of well-defined assumptions, build and
+execute a method that is justified under those assumptions, and then
+(at the end) criticize the assumptions and the results that therefrom.
+The assumptions are as follows:
+\begin{enumerate}\itemsep=0ex
+\item For typical stars taken from the \tgas\ Catalog, the parallax
+  uncertainty is larger in an absolute-magnitude sense than the
+  uncertainty in the $G$, $J$, $W1$, or relevant dust extinction. That
+  is, we can ignore photometric uncertainties relative to astrometric
+  uncertainties.
+\item For every target star $n$, there are $K$ nearby neighbors in
+  $(G-J, G-W1)$ color space that are both sufficiently close that they
+  are drawn from the same absolute magnitude distribution as star $n$,
+  but sufficiently numerous that they can support a model for their
+  distribution.
+\item We have an interim prior on stellar distances for \tgas\ stars
+  that has support at all reasonable distances, and we have a
+  $T$-sample sampling of distance $d$ for every star under that
+  interim prior.
+\end{enumerate}
 
 \begin{eqnarray}
   d_{kt} &\sim& p(d\given\varpi_k,\theta_0)
@@ -84,6 +122,10 @@ Everything we do here can be done, only far better, for subsequent
   M_G &\equiv& G - A_G - 5\,\log_{10}(\frac{d}{10\,\pc})
   \\
   p(\alpha_n\given\varpi_k) &\propto& \frac{1}{T}\,\sum_{t=1}^T \frac{p(d_{kt}\given\alpha_n)}{p(d_{kt}\given\theta_0)}
+  \\
+  \ln p(\alpha_n\given\Pi_n) &=& \sum_{k=1}^K p(\alpha_n\given\varpi_k)
+  \\
+  \Pi_n &\equiv& \setof{\varpi_k}_{k=1}^K
 \end{eqnarray}
 
 \section{Results and discussion}
