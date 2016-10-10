@@ -4,6 +4,13 @@
 % ## Style notes
 % - Use n-dash (--) for color--magnitude diagram.
 
+% ## To-do
+% - Draft introduction
+% - Get and write up results
+% - Put in all figures
+% - Draft discussion
+% - Find all HOGG, XXX, DWH, CITE, and fix these
+
 \documentclass[12pt]{article}
 \usepackage{url}
 
@@ -15,6 +22,7 @@
 \newcommand{\tgas}{\project{\acronym{TGAS}}}
 \newcommand{\twomass}{\project{\acronym{2MASS}}}
 \newcommand{\wise}{\project{All\acronym{WISE}}}
+\newcommand{\wone}{W\!\mathit{1}}
 
 % math definitions
 \newcommand{\given}{\,|\,}
@@ -66,7 +74,7 @@ comparable analysis of the star's parallax measurement alone.
 Everything we do here can be done, only far better, for subsequent
 \gaia\ data releases.
 
-\section{Philosophy of this project}
+\section{Introduction}
 
 Shrinkage!
 
@@ -77,7 +85,7 @@ our purposes) a magnitude $G_n$, a measured parallax $\varpi_n$, and
 an uncertainty $\sigma_n$ on that parallax.
 Each of these stars (with a few exceptions) can be matched to entries
 in the \twomass\ Catalog (CITE) and the \wise\ Catalog (CITE), from
-which we can get infrared $J_n$ and $W1_n$ magnitudes.
+which we can get infrared $J$ and $\wone$ magnitudes.
 We visualize these data in \figurename~\ref{fig:data}.
 
 \begin{figure}[p]
@@ -92,11 +100,11 @@ The assumptions are as follows:
 \begin{enumerate}\itemsep=0ex
 \item For typical stars taken from the \tgas\ Catalog, the parallax
   uncertainty is larger in an absolute-magnitude sense than the
-  uncertainty in the $G$, $J$, $W1$, or relevant dust extinction. That
+  uncertainty in the $G$, $J$, $\wone$, or relevant dust extinction. That
   is, we can ignore photometric uncertainties relative to astrometric
   uncertainties.
 \item For every target star $n$, there are $K$ nearby neighbors in
-  $(G-J, G-W1)$ color space that are both sufficiently close that they
+  $(G-J, G-\wone)$ color space that are both sufficiently close that they
   are drawn from the same absolute magnitude distribution as star $n$,
   but sufficiently numerous that they can support a model for their
   distribution.
