@@ -70,7 +70,7 @@ This model is a mixture of Gaussians in absolute magnitude, and the
 model is made as the optimum of a marginalized likelihood, using an
 importance-sampling trick we have used before.
 We use this noise-deconvolved model---which is very informative---to
-build a prior on distance for the target star and generate posterior
+build a prior on distance for the object star and generate posterior
 beliefs about (and a posterior sampling of) its distance.
 This method is a leave-one-out approximation to a hierarchical model for
 a patch of the color--magnitude diagram.
@@ -132,13 +132,18 @@ We shouldn't use such point estimates when it is straightforward to
 use the parallax likelihood functions responsibly to propagate the noisy
 information they provide about distances (CITE CBJ).
 
-In this \documentname, we use the parallax likelihood, and also the
-color--magnitude information about \emph{all} stars to infer every
+In this \documentname, we use the parallax likelihood correctly, and also the
+color--magnitude information about \emph{all} stars, to infer every
 individual star's distance responsibly.
 We don't go full Bayes at all levels of the hierarchy of our model,
 but we are careful not to ``use the data twice''.
 There are no conceptual roadblocks to doing a full hierarchical
 probabilistic inference in the future.
+Despite our shortcuts, we produce extremely informative and highly
+predictive posterior pdfs for stellar distances.
+Our distance estimates are far better than those made considering the
+parallax alone (CITE CBJ), despite including absolutely no new
+information about stellar physics or theory.
 
 \section{Assumptions and method}
 
@@ -167,7 +172,7 @@ The assumptions are as follows:
   uncertainty in the $G$, $J$, $\wone$, or relevant dust extinction. That
   is, we can ignore photometric uncertainties relative to astrometric
   uncertainties.
-\item For every target star $n$, there are $K$ nearby neighbors in
+\item For every object star $n$, there are $K$ nearby neighbors in
   $(G-J, G-\wone)$ color space that are both sufficiently close that they
   are drawn from the same absolute magnitude distribution as star $n$,
   but sufficiently numerous that they can support a model for their
