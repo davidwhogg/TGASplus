@@ -49,7 +49,7 @@ DWH, DSTN, JB, others?
 Given that the color--magnitude diagram of stars is informative, and
 given that stars are drawn from a quasi-stationary distribution, the
 best measure of a \gaia\ \tgas\ Catalog star's distance will not be based on
-it's tabulated parallax measurement alone (or even at all):
+its tabulated parallax measurement alone (or even at all):
 The color and magnitude are both very informative.
 Furthermore, because of statistical shrinkage---even if you
 only care about a single star in the Catalog---the colors, magnitudes,
@@ -107,6 +107,15 @@ stars---then the noisy parallaxes of all other stars with similar
 photometric properties are highly relevant to the inverse parallax
 (distance) of the star in question.
 
+\begin{figure}[p]
+~~
+\caption{The color--magnitude diagram of stars in \tgas\ and matched
+  to \twomass. We only show stars that have parallaxes measured at a
+  signal-to-noise greater than 32. The distance modulus estimate is
+  described (WHERE HOGG?) and the extinction corrections are described
+  (WHERE HOGG?).\label{fig:cmd}}
+\end{figure}
+
 One way to see this is to naively plot the color-magnitude diagram of
 stars in the \gaia\ \acronym{DR1} \tgas\ catalog of parallaxes and
 photometry, after joining with \twomass\ or \wise\ to get colors.
@@ -139,8 +148,10 @@ an uncertainty $\sigma_n$ on that parallax.
 Each of these stars (with a few exceptions) can be matched to entries
 in the \twomass\ Catalog (CITE) and the \wise\ Catalog (CITE), from
 which we can get infrared $J$ and $\wone$ magnitudes.
-We visualize these data in \figurename~\ref{fig:data}.
-
+We extinction-corrected the photometry by XXX YYY HOGG; we excluded
+the XXX stars for which these corrections exceeded XXX\,mag.
+We visualize the resulting data in \figurename~\ref{fig:data}.
+%
 \begin{figure}[p]
 ~~
 \caption{The data used in this project.\label{fig:data}}
