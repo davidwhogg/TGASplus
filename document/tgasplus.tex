@@ -71,8 +71,9 @@ We build a noise-deconvolved model of the \gaia\ $G$-band absolute
 magnitude distribution of these same-color stars, properly accounting
 for the parallax uncertainties.
 This model is a mixture of Gaussians in absolute magnitude, and the
-model is made as the optimum of a marginalized likelihood, using an
-importance-sampling trick we have used before.
+mixture parameters are set by optimizing a marginalized likelihood,
+which in turn is computed by post-processing a posterior sampling made
+under an interim prior.
 We use this noise-deconvolved model---which is very informative---to
 build a prior on distance for the object star and generate posterior
 beliefs about (and a posterior sampling of) its distance.
