@@ -10,6 +10,7 @@
 % - Put in all figures
 % - Draft discussion
 % - Find all HOGG, XXX, DWH, CITE, and fix these
+% - What does ``stationary'' mean?
 
 \documentclass[12pt]{article}
 \usepackage{url}
@@ -31,33 +32,36 @@
 \newcommand{\setof}[1]{\{{#1}\}}
 \newcommand{\pc}{\mathrm{pc}}
 
-% style stuff
+% typographic style stuff
+\setlength{\textheight}{9.25in}
+\setlength{\topmargin}{-0.25in}
+\setlength{\headheight}{0ex}
+\setlength{\headsep}{0ex}
+\setlength{\oddsidemargin}{\topmargin}
 \urlstyle{sf}
+\linespread{1.08}
 \frenchspacing
 \sloppy\sloppypar\raggedbottom
-\thispagestyle{empty}
 
 \begin{document}
 
 \section*{Far, far better distances for Gaia stars}
 
 \noindent
-DWH, DSTN, JB, others?
+DWH, DSTN, others?
 
 \paragraph{Abstract:}
 % Context:
-Given that the color--magnitude diagram of stars is informative, and
-given that stars are drawn from a quasi-stationary distribution, the
+Given that the color--magnitude diagram of stars is highly informative, the
 best measure of a \gaia\ \tgas\ Catalog star's distance will not be based on
 its tabulated parallax measurement alone (or even at all):
-The color and magnitude are both very informative.
-Furthermore, because of statistical shrinkage---even if you
-only care about a single star in the Catalog---the colors, magnitudes,
+The star's color and magnitude are both very informative too.
+Furthermore, because of statistical shrinkage, the colors, magnitudes,
 and parallaxes of all the \emph{other} stars in the Catalog are \emph{also}
 informative.
 % Aims:
-Here we make use of both of these pieces of information, but no
-physical models of stars whatsoever, to greatly improve our distance
+Here we make use of both of these pieces of information---but no
+physical models of stars whatsoever---to greatly improve our distance
 estimates for \gaia\ \tgas\ stars.
 
 % Methods:
@@ -164,7 +168,7 @@ We visualize the resulting data in \figurename~\ref{fig:data}.
 
 In what follows, we make a set of well-defined assumptions, build and
 execute a method that is justified under those assumptions, and then
-(at the end) criticize the assumptions and the results that therefrom.
+(at the end) criticize the assumptions and the results that flow therefrom.
 The assumptions are as follows:
 \begin{enumerate}\itemsep=0ex
 \item For typical stars taken from the \tgas\ Catalog, the parallax
@@ -183,6 +187,7 @@ The assumptions are as follows:
   interim prior.
 \end{enumerate}
 
+We bat around the following equations:
 \begin{eqnarray}
   d_{kt} &\sim& p(d\given\varpi_k,\theta_0)
   \\
@@ -220,7 +225,11 @@ manuscript and figures was made at git hash
 \textsf{\githash\,(\gitdate)}.
 
 \paragraph{Acknowledgements:}
-It is a pleasure to thank various people.
-We are funded by various agencies.
+It is a pleasure to thank
+  Jo Bovy (Toronto),
+  and
+  Dan Foreman-Mackey (UW)
+for valuable advice and discussions.
+We are funded by (HOGG: various agencies).
 
 \end{document}
