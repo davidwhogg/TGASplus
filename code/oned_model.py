@@ -52,9 +52,12 @@ if __name__ == "__main__":
     import pylab as plt
     lnamps = np.log([1.1, 0.5, 0.75])
     means = [1.2, 1.6, 2.1]
-    vars = [0.01, 0.01, 0.01]
+    vars = [0.04, 0.01, 0.01]
     foo = mixture_of_oned_Gaussians(lnamps, means, vars)
-    xs = np.arange(0.005, 3.0, 0.01)
+    dx = 0.01
+    xs = np.arange(0.5 * dx, 3.0, dx)
+    vals = np.exp(foo.evaluate_ln(xs))
     plt.clf()
-    plt.plot(xs, np.exp(foo.evaluate_ln(xs)), "k-")
+    plt.plot(xs, vals, "k-")
     plt.savefig("deleteme.png")
+    print(np.sum(np.exp(lnamps)), np.sum(vals) * dx)
