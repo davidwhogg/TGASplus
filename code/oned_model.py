@@ -45,7 +45,7 @@ class mixture_of_oned_Gaussians:
         """
         vals = -np.inf
         for q in range(self.Q):
-            vals = np.logaddexp(vals, np.exp(lnamps[q] + ln_oned_Gaussian(xs, self.means[q], self.vars[q])))
+            vals = np.logaddexp(vals, lnamps[q] + ln_oned_Gaussian(xs, self.means[q], self.vars[q]))
         return vals
 
 if __name__ == "__main__":
@@ -56,5 +56,5 @@ if __name__ == "__main__":
     foo = mixture_of_oned_Gaussians(lnamps, means, vars)
     xs = np.arange(0.005, 3.0, 0.01)
     plt.clf()
-    plt.plot(xs, foo.evaluate_ln(xs), "k-")
+    plt.plot(xs, np.exp(foo.evaluate_ln(xs)), "k-")
     plt.savefig("deleteme.png")
