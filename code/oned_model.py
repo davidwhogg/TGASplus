@@ -48,8 +48,77 @@ class mixture_of_oned_Gaussians:
             vals = np.logaddexp(vals, lnamps[q] + ln_oned_Gaussian(xs, self.means[q], self.vars[q]))
         return vals
 
+def sample_one_star_parallax(varpi, sigma, T):
+    """
+    ## bugs:
+    - Prior hard-coded.
+    - Units ugly: varpi required in mas; 1/varpi in kpc.
+    - I think the >8 requirement is a good one, but I'm not sure it's necessary.
+    """
+    prior_length = 20. # kpc
+    magic_number = 8 # MAGIC
+    varpis = np.array([])
+    iter = 1
+    while len(varpis) < T:
+        foos = varpi + sigma * np.random.normal(size=2**iter*magic_number)
+        print("generated {} trials...".format(len(foos)))
+        distances = 1. / foos
+        priors = np.zeros_like(foos)
+        good = (foos > (1. / prior_length))
+        if np.sum(good):
+            priors[good] = foos[good] ** -4 # * np.exp(-1. * distances[good] ** 2 / prior_length ** 2)
+            bars = np.random.uniform(0., np.max(priors), size=len(foos))
+            print(min(priors), max(priors), min(bars), max(bars))
+            accepts = priors > bars
+            print("...and {} survived".format(np.sum(accepts)))
+            if np.sum(accepts) > magic_number:
+                varpis = np.append(varpis, foos[accepts])
+        iter += 1
+    return varpis[0:T]
+
+class parallax_catalog:
+
+    def __init__(self, varpis, ivars):
+        self.K = len(varpis)
+        self.varpis = varpis.copy()
+        self.ivars = ivars.copy()
+        assert self.varpis.shape == (self.K, )
+        assert self.ivars.shape == (self.K, )
+        self.samples = None
+
+    def make_posterior_samples(self):
+        pass
+
+    def get_posterior_samples(self):
+        if self.samples is None:
+            self.make_posterior_samples()
+        return self.samples
+
 if __name__ == "__main__":
     import pylab as plt
+    plotnum = 0
+    for varpi, sigma in [(270., 19.),
+                         ( 90., 19.),
+                         ( 27., 19.),
+                         (  9., 19.),
+                         (  2.7, 19.),
+                         (-27., 19.), ]:
+        varpis = sample_one_star_parallax(varpi, sigma, 1024)
+        plt.clf()
+        plt.hist(varpis, bins=100.)
+        plt.axvline(varpi, color="k")
+        plt.axvline(varpi-sigma, color="k", alpha=0.5)
+        plt.axvline(varpi+sigma, color="k", alpha=0.5)
+        plt.savefig("varpis_{:02d}.png".format(plotnum))
+        plt.clf()
+        plt.hist(1000./varpis, bins=100.)
+        plt.axvline(1000./varpi, color="k")
+        plt.axvline(1000./(varpi-sigma), color="k", alpha=0.5)
+        plt.axvline(1000./(varpi+sigma), color="k", alpha=0.5)
+        plt.savefig("distances_{:02d}.png".format(plotnum))
+        plotnum += 1
+
+if False:
     lnamps = np.log([1.1, 0.5, 0.75])
     means = [1.2, 1.6, 2.1]
     vars = [0.04, 0.01, 0.01]
