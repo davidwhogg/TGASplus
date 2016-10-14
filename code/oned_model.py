@@ -56,32 +56,28 @@ def sample_one_star_parallax(varpi, sigma, T):
     - I think the >8 requirement is a good one, but I'm not sure it's necessary.
     """
     prior_length = 1. # kpc
-    magic_number = 8 # MAGIC
+    magic_number = 32 # MAGIC
     varpis = np.array([])
+
     iter = 1
-
-    if sigma < (varpi / 4.):
-        while len(varpis) < T:
-        # sample from the "likelihood" and reject using the prior
-            foos = varpi + sigma * np.random.normal(size=iter*1024)
-            print("generated {} likelihood trials...".format(len(foos)))
-            distances = 1. / foos
-            priors = np.zeros_like(foos)
-            good = (foos > (1. / prior_length))
-            if np.sum(good):
-                priors[good] = foos[good] ** -4
-                bars = np.random.uniform(0., np.max(priors), size=len(foos))
-                print(min(priors), max(priors), min(bars), max(bars))
-                accepts = priors > bars
-                print("...and {} survived the prior".format(np.sum(accepts)))
-                if np.sum(accepts) > magic_number:
-                    varpis = np.append(varpis, foos[accepts])
-            iter += 1
-        return varpis[0:T]
-
     while len(varpis) < T:
+        # sample from the "likelihood" and reject using the prior
+        foos = varpi + sigma * np.random.normal(size=iter*(magic_number))
+        print("generated {} likelihood trials...".format(len(foos)))
+        distances = 1. / foos
+        priors = np.zeros_like(foos)
+        good = (foos > (1. / prior_length))
+        if np.sum(good):
+            priors[good] = foos[good] ** -4
+            bars = np.random.uniform(0., np.max(priors), size=len(foos))
+            print(min(priors), max(priors), min(bars), max(bars))
+            accepts = priors > bars
+            print("...and {} survived the prior".format(np.sum(accepts)))
+            if np.sum(accepts) > magic_number:
+                varpis = np.append(varpis, foos[accepts])
+
         # sample from the prior and reject using the likelihood
-        foos = 1. / (np.random.uniform(0., prior_length ** 3, size=iter*1024) ** (1. / 3.)) # prior
+        foos = 1. / (np.random.uniform(0., prior_length ** 3, size=iter*(magic_number)) ** (1. / 3.)) # prior
         print("generated {} prior trials...".format(len(foos)))
         distances = 1. / foos
         likes = np.exp(-0.5 * (foos - varpi) ** 2 / sigma ** 2)
@@ -92,6 +88,7 @@ def sample_one_star_parallax(varpi, sigma, T):
         if np.sum(accepts) > magic_number:
             varpis = np.append(varpis, foos[accepts])
         iter += 1
+
     return varpis[0:T]
 
 class parallax_catalog:
@@ -115,29 +112,20 @@ class parallax_catalog:
 if __name__ == "__main__":
     import pylab as plt
     plotnum = 0
-    for varpi, sigma in [(270., 19.),
-                         ( 90., 19.),
-                         ( 27., 19.),
-                         (  9., 19.),
-                         (  2.7, 19.),
-                         (-27., 19.),
-                         ]:
+    sigma = 19.
+    for varpi in np.arange(450., 20., -5.):
         varpis = sample_one_star_parallax(varpi, sigma, 1024)
         plt.clf()
-        plt.hist(varpis, bins=100.)
+        bins = np.arange(-0.5, 501., 1.)
+        plt.hist(varpis, bins=bins)
         plt.axvline(varpi, color="k")
+        plt.text(varpi, 45., "measured parallax", rotation=90., ha="right")
         plt.axvline(varpi-sigma, color="k", alpha=0.5)
         plt.axvline(varpi+sigma, color="k", alpha=0.5)
+        plt.xlim(0., 500.)
+        plt.xlabel("true parallax (mas)")
+        plt.ylim(0., 50.)
         plt.savefig("varpis_{:02d}.png".format(plotnum))
-        plt.clf()
-        plt.hist(1000./varpis, bins=100.)
-        if varpi > 0:
-            plt.axvline(1000./varpi, color="k")
-        if (varpi - sigma) > 0:
-            plt.axvline(1000./(varpi-sigma), color="k", alpha=0.5)
-        if (varpi + sigma) > 0:
-            plt.axvline(1000./(varpi+sigma), color="k", alpha=0.5)
-        plt.savefig("distances_{:02d}.png".format(plotnum))
         plotnum += 1
 
 if False:
